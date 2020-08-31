@@ -8,6 +8,14 @@ app.use(cors());
 app.use(express.json());
 
 
+app.use(express.static(path.join(__dirname, 'frontend')));
+
+if(process.env.NODE_ENV === 'production') {
+  app.get('/*', function (req, res) {
+   	res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  });
+}
+
 // ROUTES
 
 // CREATE A TO-DO
